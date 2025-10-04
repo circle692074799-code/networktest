@@ -8,13 +8,13 @@
     <style>
         body, html { height: 100%; }
         body { display: flex; flex-direction: column; }
-        main { flex-grow: 1; }
+        main { flex-grow: 1;min-height: 110vh; }
     </style>
 </head>
 <body class="bg-white text-black font-sans">
 
-    <header class="p-10">
-    <nav class="flex justify-between items-center">
+    <header class="p-4 md:p-10">
+    <nav class="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-0">
         <div class="flex items-center gap-3">
             <a href="#" id="home-link" class="text-lg font-bold tracking-wider">
                 <span>KAY KANG</span>
@@ -26,7 +26,7 @@
             </a>
         </div>
 
-        <ul class="flex items-center space-x-10 text-sm">
+        <ul class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-10 text-sm mt-8 md:mt-0">
             <li class="relative">
                 <div class="dropdown-toggle flex items-center cursor-pointer" data-category="collab">
                     <span data-lang-key="collab">COLLAB</span><span class="symbol ml-1 font-light w-3 text-center">+</span>
@@ -94,8 +94,8 @@
     </nav>
 </header>
 
-<main class="p-10 pb-24">
-    <div id="homepage-carousel" class="relative w-[70%] mx-auto aspect-video overflow-hidden">
+<main class="p-4 md:p-10 pb-24">
+    <div id="homepage-carousel" class="relative w-full md:w-[70%] mx-auto aspect-video overflow-hidden">
         <div class="slides-wrapper flex h-full transition-transform duration-500 ease-in-out">
             <div class="slide w-full h-full flex-shrink-0">
                 <img src="images/home-1.jpg" class="w-full h-full object-cover" alt="Project 1">
@@ -130,10 +130,10 @@
         </div>
         <div>
             <ul class="flex space-x-8">
-                <li><a href="mailto:your-email@example.com" class="hover:underline" data-lang-key="email">Email</a></li>
-                <li><a href="#" class="hover:underline" data-lang-key="linkedin">LinkedIn</a></li>
-                <li><a href="#" class="hover:underline" data-lang-key="instagram">Instagram</a></li>
-                <li><a href="#" class="hover:underline" data-lang-key="rednote">RedNote</a></li>
+                <li><a href="mailto:kaykangxy@gmail.com" class="hover:underline" data-lang-key="email">Email</a></li>
+                <li><a href="https://www.linkedin.com/in/kay-kang-13a395300" class="hover:underline" data-lang-key="linkedin">LinkedIn</a></li>
+                <li><a href="https://www.instagram.com/_ouo_kay?igsh=MWFxaTV3a2lhbXp5Mw%3D%3D&utm_source=qr" class="hover:underline" data-lang-key="instagram">Instagram</a></li>
+                <li><a href="https://xhslink.com/m/6wmS3XpepDb" class="hover:underline" data-lang-key="rednote">RedNote</a></li>
             </ul>
         </div>
     </footer>
@@ -259,9 +259,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.dropdown-menu a').forEach(link => {
             const key = link.dataset.langKey;
             if (translations[key] && translations[key].en.includes('(WIP)')) {
-                link.classList.add('text-gray-400', 'line-through', 'pointer-events-none', 'cursor-not-allowed');
+                link.classList.add('text-gray-400', 'pointer-events-none', 'cursor-not-allowed');
             } else {
-                link.classList.remove('text-gray-400', 'line-through', 'pointer-events-none', 'cursor-not-allowed');
+                link.classList.remove('text-gray-400', 'pointer-events-none', 'cursor-not-allowed');
             }
         });
     };
