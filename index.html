@@ -34,7 +34,7 @@
                 </a>
                 <a href="resume.pdf" target="_blank" class="group">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 M0 01.293.707V19a2 2 0 01-2 2z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                 </a>
             </div>
@@ -125,19 +125,19 @@
     <main class="p-4 md:p-10 pb-24">
         <div id="homepage-carousel" class="relative w-full md:w-[70%] mx-auto aspect-video overflow-hidden">
             <div id="slides-wrapper" class="flex h-full">
-                <div class="slide w-full h-full flex-shrink-0">
-                    <img src="images/home-1.jpg" class="w-full h-full object-cover" alt="Project 1">
+                <div class="slide w-full h-full flex-shrink-0 cursor-pointer" data-project="puma-rose">
+                    <img src="images/home-1.jpg" class="w-full h-full object-cover" alt="Project PUMA ROSÉ">
                 </div>
-                <div class="slide w-full h-full flex-shrink-0">
-                    <img src="images/home-2.jpg" class="w-full h-full object-cover" alt="Project 2">
+                <div class="slide w-full h-full flex-shrink-0 cursor-pointer" data-project="pulsar-lite">
+                    <img src="images/home-2.jpg" class="w-full h-full object-cover" alt="Project Pulsar Lite">
                 </div>
-                <div class="slide w-full h-full flex-shrink-0">
-                    <img src="images/home-3.jpg" class="w-full h-full object-cover" alt="Project 3">
+                <div class="slide w-full h-full flex-shrink-0 cursor-pointer" data-project="cny-loong">
+                    <img src="images/home-3.jpg" class="w-full h-full object-cover" alt="Project Year of The Loong">
                 </div>
-                <div class="slide w-full h-full flex-shrink-0">
-                    <img src="images/home-4.jpg" class="w-full h-full object-cover" alt="Project 4">
+                <div class="slide w-full h-full flex-shrink-0 cursor-pointer" data-project="fun-racer">
+                    <img src="images/home-4.jpg" class="w-full h-full object-cover" alt="Project Fun Racer">
                 </div>
-            </div>
+                </div>
 
             <button id="prev-btn" class="absolute top-1/2 left-4 -translate-y-1/2 p-1 text-white hover:scale-150 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
@@ -243,6 +243,16 @@ document.addEventListener('DOMContentLoaded', () => {
         let autoplayInterval = null;
         let isTransitioning = false;
 
+        // ▼▼▼ KEY CHANGE HERE ▼▼▼
+        // Event Delegation for slide clicks
+        slidesWrapper.addEventListener('click', (e) => {
+            const slide = e.target.closest('.slide');
+            if (slide && slide.dataset.project) {
+                openSlideshow(slide.dataset.project);
+            }
+        });
+        // ▲▲▲ KEY CHANGE HERE ▲▲▲
+
         const firstClone = slides[0].cloneNode(true);
         const lastClone = slides[slides.length - 1].cloneNode(true);
         slidesWrapper.appendChild(firstClone);
@@ -318,13 +328,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const symbol = toggle.querySelector('.symbol');
         const chevron = toggle.querySelector('.lang-chevron');
 
-        // Mobile Accordion Click
         toggle.addEventListener('click', (e) => {
             if (window.innerWidth < 768) { 
                 e.stopPropagation();
                 const wasOpen = !menu.classList.contains('hidden');
-                
-                // Close all other menus in the same list
                 parentLi.parentElement.querySelectorAll('.dropdown-menu').forEach(m => {
                     if (m !== menu) {
                         m.classList.add('hidden');
@@ -332,19 +339,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (s) s.textContent = '+';
                     }
                 });
-
                 menu.classList.toggle('hidden');
                 if (symbol) symbol.textContent = wasOpen ? '+' : '–';
             }
         });
 
-        // Desktop Hover
         parentLi.addEventListener('mouseenter', () => {
             if (window.innerWidth >= 768) {
                 menu.classList.remove('hidden');
                 setTimeout(() => {
                     menu.classList.remove('md:opacity-0', 'md:scale-95');
-                }, 10); // Timeout to ensure display applies before transition
+                }, 10);
                 menu.classList.remove('md:pointer-events-none');
                 if (symbol) symbol.textContent = '–';
                 if (chevron) chevron.classList.add('rotate-180');
@@ -355,25 +360,39 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.innerWidth >= 768) {
                 menu.classList.add('md:opacity-0', 'md:scale-95');
                 menu.classList.add('md:pointer-events-none');
-                // Hide after transition duration (200ms)
                 setTimeout(() => {
                     menu.classList.add('hidden');
-                }, 200); 
+                }, 200);
                 if (symbol) symbol.textContent = '+';
                 if (chevron) chevron.classList.remove('rotate-180');
             }
         });
     });
     
-    // --- General Link Click Handler (for closing mobile menu) ---
+    // --- General Link Click Handler (Event Delegation) ---
     if (navLinks) {
         navLinks.addEventListener('click', (e) => {
             const targetLink = e.target.closest('a');
             if (!targetLink) return;
 
-            const isDropdownToggle = e.target.closest('.dropdown-toggle');
+            e.preventDefault();
 
-            // Close mobile menu if a real link (not a toggle) is clicked
+            const isDropdownToggle = e.target.closest('.dropdown-toggle');
+            
+            // Handle Language Switch
+            if (targetLink.dataset.lang) {
+                setLanguage(targetLink.dataset.lang);
+            }
+            // Handle Project Link
+            else if (targetLink.dataset.project) {
+                openSlideshow(targetLink.dataset.project);
+            }
+            // Handle WIP/Filter Link (for future use)
+            else if (targetLink.dataset.filter) {
+                // Placeholder for filter logic
+            }
+            
+            // Close mobile menu if a real link is clicked (not a toggle)
             if (window.innerWidth < 768 && !navLinks.classList.contains('hidden') && !isDropdownToggle) {
                 menuBtn.click();
             }
@@ -420,26 +439,21 @@ document.addEventListener('DOMContentLoaded', () => {
         updateActiveLanguage(lang);
     };
     
-    document.querySelectorAll('[data-lang]').forEach(el => {
-        el.addEventListener('click', (e) => { e.preventDefault(); setLanguage(el.dataset.lang); });
-    });
-    
     setLanguage(localStorage.getItem('language') || 'en');
 
     // --- Project Slideshow ---
-    if (slideshow) {
-        const closeSlideshowBtn = document.getElementById('close-slideshow');
-        document.querySelectorAll('.project-link').forEach(link => {
-            link.addEventListener('click', (e) => { e.preventDefault(); openSlideshow(link.dataset.project); });
-        });
-        closeSlideshowBtn.addEventListener('click', () => closeSlideshow());
-    }
-
+    const slideshowWrapper = document.getElementById('slideshow-wrapper');
+    const slideshowCounter = document.getElementById('slideshow-counter');
+    const slideshowNextBtn = document.getElementById('slideshow-next');
+    const slideshowPrevBtn = document.getElementById('slideshow-prev');
+    const closeSlideshowBtn = document.getElementById('close-slideshow');
+    let slideshowState = { currentIndex: 0, images: [] };
+    
     function openSlideshow(projectName) {
         const images = projectImages[projectName];
         if (!images || images.length === 0) return;
-        const slideshowWrapper = document.getElementById('slideshow-wrapper');
-        const slideshowCounter = document.getElementById('slideshow-counter');
+        
+        slideshowState = { currentIndex: 0, images: images };
         slideshowWrapper.innerHTML = '';
         images.forEach(imgSrc => {
             const slide = document.createElement('div');
@@ -447,20 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
             slide.innerHTML = `<img src="${imgSrc}" class="max-w-full max-h-full object-contain">`;
             slideshowWrapper.appendChild(slide);
         });
-        let currentState = { currentIndex: 0, images: images };
-        const goToProjectSlide = (index) => {
-            slideshowWrapper.style.transform = `translateX(-${index * 100}%)`;
-            currentState.currentIndex = index;
-            slideshowCounter.textContent = `${index + 1} / ${currentState.images.length}`;
-        };
-        document.getElementById('slideshow-next').onclick = () => {
-            const nextIndex = (currentState.currentIndex + 1) % currentState.images.length;
-            goToProjectSlide(nextIndex);
-        };
-        document.getElementById('slideshow-prev').onclick = () => {
-            const prevIndex = (currentState.currentIndex - 1 + currentState.images.length) % currentState.images.length;
-            goToProjectSlide(prevIndex);
-        };
+        
         slideshow.classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
         goToProjectSlide(0);
@@ -469,6 +470,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeSlideshow() {
         slideshow.classList.add('hidden');
         document.body.classList.remove('overflow-hidden');
+    }
+
+    function goToProjectSlide(index) {
+        slideshowWrapper.style.transform = `translateX(-${index * 100}%)`;
+        slideshowState.currentIndex = index;
+        slideshowCounter.textContent = `${index + 1} / ${slideshowState.images.length}`;
+    };
+
+    if (slideshow) {
+        slideshowNextBtn.addEventListener('click', () => {
+            const nextIndex = (slideshowState.currentIndex + 1) % slideshowState.images.length;
+            goToProjectSlide(nextIndex);
+        });
+        slideshowPrevBtn.addEventListener('click', () => {
+            const prevIndex = (slideshowState.currentIndex - 1 + slideshowState.images.length) % slideshowState.images.length;
+            goToProjectSlide(prevIndex);
+        });
+        closeSlideshowBtn.addEventListener('click', closeSlideshow);
     }
 });
 </script>
