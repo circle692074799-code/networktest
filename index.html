@@ -69,6 +69,7 @@
                         <li><a href="#" class="project-link block py-1 hover:opacity-60" data-project="pulsar-lite" data-lang-key="pulsar-lite">Pulsar Lite TN</a></li>
                         <li><a href="#" class="block py-1 hover:opacity-60" data-filter="pulsar-wedge" data-lang-key="pulsar-wedge">Pulsar Wedge Sandal NU (WIP)</a></li>
                         <li><a href="#" class="block py-1 hover:opacity-60" data-filter="rs-sandel" data-lang-key="rs-sandel">RS-Sandel-CNNU (WIP)</a></li>
+                        <li><a href="#" class="block py-1 hover:opacity-60" data-filter="qixi-magpie" data-lang-key="qixi-magpie">Qixi Festival Design - Indoor QIXI Magpie (WIP)</a></li>
                     </ul>
                 </li>
                  <li class="relative w-full text-center md:w-auto">
@@ -80,6 +81,9 @@
                                md:top-full md:left-1/2 md:-translate-x-1/2">
                         <li><a href="#" class="project-link block py-1 hover:opacity-60" data-project="cny-loong" data-lang-key="cny-loong">24' CNY-Year of The Loong</a></li>
                         <li><a href="#" class="block py-1 hover:opacity-60" data-filter="dream-pack" data-lang-key="dream-pack">Dream Pack (WIP)</a></li>
+                        <li><a href="#" class="block py-1 hover:opacity-60" data-filter="qixi-magpie" data-lang-key="qixi-magpie">Qixi Festival Design - Indoor QIXI Magpie (WIP)</a></li>
+                        <li><a href="#" class="block py-1 hover:opacity-60" data-filter="qixi-galaxy" data-lang-key="qixi-galaxy">Qixi Festival Design - Indoor QIXI Galaxy (WIP)</a></li>
+                        <li><a href="#" class="block py-1 hover:opacity-60" data-filter="feminine-pack" data-lang-key="feminine-pack">Feminine Pack - Women's Exclusive Collection (WIP)</a></li>
                     </ul>
                 </li>
                  <li class="relative w-full text-center md:w-auto">
@@ -196,23 +200,26 @@ document.addEventListener('DOMContentLoaded', () => {
         'fun-racer': ['images/fun-1.jpg', 'images/fun-2.jpg', 'images/fun-3.jpg', 'images/fun-4.jpg', 'images/fun-5.jpg', 'images/fun-6.jpg']
     };
     const translations = {
-        'collab': { en: 'COLLAB', zh: '合作项目' }, 'footwear': { en: 'FOOTWEAR', zh: '鞋类设计' },
+        'collab': { en: 'COLLAB', zh: '联名项目' }, 'footwear': { en: 'FOOTWEAR', zh: '鞋设计' },
         'cmf': { en: 'CMF', zh: '色彩材质' }, 'kids': { en: 'KIDS', zh: '儿童' },
         'lab': { en: 'LAB', zh: '实验项目' }, 'english': { en: 'English', zh: '语言' },
-        'footwear-design': { en: 'Footwear Design', zh: '鞋履设计' }, 'email': { en: 'Email', zh: '邮箱' },
-        'linkedin': { en: 'LinkedIn', zh: '领英' }, 'instagram': { en: 'Instagram', zh: '照片墙' },
-        'rednote': { en: 'RedNote', zh: '小红书' }, 'puma-rose': { en: 'PUMA ROSÉ', zh: 'PUMA ROSÉ' },
+        'footwear-design': { en: 'Footwear Design', zh: '鞋设计' }, 'email': { en: 'Email', zh: '邮箱' },
+        'linkedin': { en: 'LinkedIn', zh: '领英' }, 'instagram': { en: 'Instagram', zh: 'instagram' },
+        'rednote': { en: 'RedNote', zh: '小红书' }, 'puma-rose': { en: 'PUMA x ROSÉ', zh: 'PUMA x ROSÉ' },
         'pulsar-lite': { en: 'Pulsar Lite TN', zh: 'Pulsar Lite TN' },
-        'pulsar-wedge': { en: 'Pulsar Wedge Sandal NU (WIP)', zh: 'Pulsar Wedge 坡跟凉鞋 (开发中)' },
-        'rs-sandel': { en: 'RS-Sandel-CNNU (WIP)', zh: 'RS-Sandel-CNNU (开发中)' },
+        'pulsar-wedge': { en: 'Pulsar Wedge Sandal NU (WIP)', zh: 'Pulsar Wedge 玛丽珍凉鞋 (整理中)' },
+        'rs-sandel': { en: 'RS-Sandel NU (WIP)', zh: 'RS-Sandel NU (整理中)' },
         'cny-loong': { en: "24' CNY-Year of The Loong", zh: '24龙年限定' },
-        'dream-pack': { en: 'Dream Pack (WIP)', zh: '梦境系列 (开发中)' },
+        'dream-pack': { en: 'Dream Pack (WIP)', zh: 'Dream Pack (整理中)' },
+        'qixi-magpie': { en: "Qixi Festival Design - Indoor Magpie (WIP)", zh: '七夕限定设计 - 喜鹊 (整理中)' },
+        'qixi-galaxy': { en: "Qixi Festival Design - Indoor Galaxy (WIP)", zh: '七夕限定设计 - 银河 (整理中)' },
+        'feminine-pack': { en: "Feminine Pack - Women's Exclusive Collection (WIP)", zh: '女性专属系列 (整理中)' },
         'fun-racer': { en: 'Fun Racer Trial Sandal TN', zh: 'Fun Racer 越野凉鞋' },
-        'material-force': { en: 'Material Force: Body Installation', zh: '材料之力：身体装置' },
-        'evolve-sandal': { en: 'Evolve Sandal OTNU (WIP)', zh: 'Evolve 凉鞋 OTNU (开发中)' },
-        'excursion-utl': { en: 'Excursion UTL WTR NU (WIP)', zh: 'Excursion UTL WTR NU (开发中)' },
-        'evolve-run': { en: 'Evolve Run Slip-on NU (WIP)', zh: 'Evolve Run 一脚蹬 NU (开发中)' },
-        'pounce-lite': { en: 'Pounce Lite Sand ND (WIP)', zh: 'Pounce Lite 凉鞋 ND (开发中)' },
+        'material-force': { en: 'Material Force: Body Installation', zh: '物质力量-感官装置' },
+        'evolve-sandal': { en: 'Evolve Sandal OT NU (WIP)', zh: 'Evolve 露趾凉鞋 NU (整理中)' },
+        'excursion-utl': { en: 'Excursion UTL WTR NU (WIP)', zh: 'Excursion UTL WTR NU (整理中)' },
+        'evolve-run': { en: 'Evolve Run Slip-on NU (WIP)', zh: 'Evolve Run 一脚蹬 NU (整理中)' },
+        'pounce-lite': { en: 'Pounce Lite Sandal NU (WIP)', zh: 'Pounce Lite 凉鞋 NU (整理中)' },
         'back': { en: 'Back', zh: '返回' },
     };
 
@@ -458,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
         images.forEach(imgSrc => {
             const slide = document.createElement('div');
             slide.className = 'slide w-full h-full flex-shrink-0 flex items-center justify-center';
-            slide.innerHTML = `<img src="${imgSrc}" class="max-w-full max-h-full object-contain">`;
+            slide.innerHTML = `<img src="${imgSrc}" class="w-[90%] h-[90%] object-contain">`;
             slideshowWrapper.appendChild(slide);
         });
         
