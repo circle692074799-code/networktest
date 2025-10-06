@@ -106,7 +106,7 @@
                     <ul class="dropdown-menu hidden md:absolute w-full md:w-64 py-2 md:py-0 space-y-2 text-center
                                md:opacity-0 md:scale-95 md:pointer-events-none md:transition-all md:ease-out md:duration-200
                                md:top-full md:left-1/2 md:-translate-x-1/2">
-                        <li><a href="#" class="block py-1 hover:opacity-60" data-filter="material-force" data-lang-key="material-force">Material Force: Body Installation</a></li>
+                        <li><a href="#" class="project-link block py-1 hover:opacity-60" data-project="material-force" data-lang-key="material-force">Material Force: Body Installation</a></li>
                     </ul>
                 </li>
                 <li class="relative w-full text-center md:w-auto">
@@ -127,20 +127,8 @@
 
     <main class="p-4 md:p-10 pb-24">
         <div id="homepage-carousel" class="relative w-full md:w-[70%] mx-auto aspect-video overflow-hidden">
-            <div id="slides-wrapper" class="flex h-full">
-                <div class="slide w-full h-full flex-shrink-0 cursor-pointer" data-project="puma-rose">
-                    <img src="images/home-1.jpg" class="w-full h-full object-cover" alt="Project PUMA ROSÉ">
-                </div>
-                <div class="slide w-full h-full flex-shrink-0 cursor-pointer" data-project="pulsar-lite">
-                    <img src="images/home-2.jpg" class="w-full h-full object-cover" alt="Project Pulsar Lite">
-                </div>
-                <div class="slide w-full h-full flex-shrink-0 cursor-pointer" data-project="cny-loong">
-                    <img src="images/home-3.jpg" class="w-full h-full object-cover" alt="Project Year of The Loong">
-                </div>
-                <div class="slide w-full h-full flex-shrink-0 cursor-pointer" data-project="fun-racer">
-                    <img src="images/home-4.jpg" class="w-full h-full object-cover" alt="Project Fun Racer">
-                </div>
-                </div>
+
+            <div id="slides-wrapper" class="flex h-full"></div>
 
             <button id="prev-btn" class="absolute top-1/2 left-4 -translate-y-1/2 p-1 text-white hover:scale-150 transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
@@ -193,11 +181,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Data ---
     const projectImages = {
-        'puma-rose': ['images/rose-1.jpg', 'images/rose-2.jpg', 'images/rose-3.jpg', 'images/rose-4.jpg', 'images/rose-5.jpg', 'images/rose-6.jpg', 'images/rose-7.jpg'],
-        'pulsar-lite': ['images/pulsar-1.jpg', 'images/pulsar-2.jpg', 'images/pulsar-3.jpg', 'images/pulsar-4.jpg', 'images/pulsar-5.jpg', 'images/pulsar-6.jpg', 'images/pulsar-7.jpg', 'images/pulsar-8.jpg'],
-        'cny-loong': ['images/cny-1.jpg', 'images/cny-2.jpg', 'images/cny-3.jpg', 'images/cny-4.jpg', 'images/cny-5.jpg', 'images/cny-6.jpg', 'images/cny-7.jpg', 'images/cny-8.jpg'],
-        'fun-racer': ['images/fun-1.jpg', 'images/fun-2.jpg', 'images/fun-3.jpg', 'images/fun-4.jpg', 'images/fun-5.jpg', 'images/fun-6.jpg']
-    };
+    'puma-rose': ['images/rose-1.jpg', 'images/rose-2.jpg', 'images/rose-3.jpg', 'images/rose-4.jpg', 'images/rose-5.jpg', 'images/rose-6.jpg', 'images/rose-7.jpg'],
+    'pulsar-lite': ['images/pulsar-1.jpg', 'images/pulsar-2.jpg', 'images/pulsar-3.jpg', 'images/pulsar-4.jpg', 'images/pulsar-5.jpg', 'images/pulsar-6.jpg', 'images/pulsar-7.jpg', 'images/pulsar-8.jpg'],
+    'cny-loong': ['images/cny-1.jpg', 'images/cny-2.jpg', 'images/cny-3.jpg', 'images/cny-4.jpg', 'images/cny-5.jpg', 'images/cny-6.jpg', 'images/cny-7.jpg', 'images/cny-8.jpg'],
+    'fun-racer': ['images/fun-1.jpg', 'images/fun-2.jpg', 'images/fun-3.jpg', 'images/fun-4.jpg', 'images/fun-5.jpg', 'images/fun-6.jpg'],
+    'material-force': [
+        'images/Material-1.jpg', 'images/Material-2.jpg', 'images/Material-3.jpg',
+        'images/Material-4.jpg', 'images/Material-5.jpg', 'images/Material-6.jpg',
+        'images/Material-7.jpg', 'images/Material-8.jpg', 'images/Material-9.jpg',
+        'images/Material-10.jpg', 'images/Material-11.jpg', 'images/Material-12.jpg',
+        'images/Material-13.jpg', 'images/Material-14.jpg'
+    ]
+};
     const translations = {
         'collab': { en: 'COLLAB', zh: '联名项目' }, 'footwear': { en: 'FOOTWEAR', zh: '鞋设计' },
         'cmf': { en: 'CMF', zh: '色彩材质' }, 'kids': { en: 'KIDS', zh: '儿童' },
@@ -244,6 +239,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const slidesWrapper = document.getElementById('slides-wrapper');
         const nextBtn = document.getElementById('next-btn');
         const prevBtn = document.getElementById('prev-btn');
+        const homepageSlidesData = [
+            { project: 'puma-rose',      image: 'images/home-1.jpg', alt: 'Project PUMA ROSÉ' },
+            { project: 'pulsar-lite',    image: 'images/home-2.jpg', alt: 'Project Pulsar Lite' },
+            { project: 'cny-loong',      image: 'images/home-3.jpg', alt: 'Project Year of The Loong' },
+            { project: 'fun-racer',      image: 'images/home-4.jpg', alt: 'Project Fun Racer' },
+            { project: 'material-force', image: 'images/home-5.jpg', alt: 'Project Material Force' }
+        ];
+
+        // 根据上面的列表自动生成轮播图
+        homepageSlidesData.forEach(slideData => {
+            const slideElement = document.createElement('div');
+            slideElement.className = 'slide w-full h-full flex-shrink-0 cursor-pointer';
+            slideElement.dataset.project = slideData.project;
+            slideElement.innerHTML = `<img src="${slideData.image}" class="w-full h-full object-cover" alt="${slideData.alt}">`;
+            slidesWrapper.appendChild(slideElement);
+        });
         let slides = Array.from(slidesWrapper.children);
         let currentIndex = 1;
         let autoplayInterval = null;
